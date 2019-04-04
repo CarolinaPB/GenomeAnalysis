@@ -10,7 +10,7 @@
 module load bioinfo-tools
 module load FastQC/0.11.5
 # Your commands
-for filename in /domus/h1/carolpb/GenomeAnalysis/data/wgs/*.fastq.gz;
+for filename in /domus/h1/carolpb/GenomeAnalysis/data/wgs/
     do
-        fastqc filename -o /home/carolpb/GenomeAnalysis/data/wgs/fastqc_results
+        fastqc filename -o /home/carolpb/GenomeAnalysis/data/wgs/fastqc_results;
     done
