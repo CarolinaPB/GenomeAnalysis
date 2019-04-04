@@ -12,5 +12,5 @@ module load FastQC/0.11.5
 # Your commands
 for filename in /home/carolpb/GenomeAnalysis/data/wgs/*.fastq.gz;
 do
-    fastqc -o /home/carolpb/GenomeAnalysis/data/wgs/fastqc_results
+    fastqc filename -o /home/carolpb/GenomeAnalysis/data/wgs/fastqc_results
 done
