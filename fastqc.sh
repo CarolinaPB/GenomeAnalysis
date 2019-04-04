@@ -1,5 +1,5 @@
 #!/bin/bash -l
-SBATCH -A g2019003
+SBATCH -A g2019003_1
 SBATCH -p core
 SBATCH -n 2
 SBATCH -t 00:05:00
