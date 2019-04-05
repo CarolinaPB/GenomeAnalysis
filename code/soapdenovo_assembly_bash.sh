@@ -12,4 +12,4 @@ module load bioinfo-tools
 module load soapdenovo-soapdenovo/2.04-r240
 
 
-soapdenovo all -s /home/carolpb/GenomeAnalysis/code/soapdenovo_assembly_config.txt -K 49 -o /home/carolpb/GenomeAnalysis/results/2_Assembly_dna/output49 -p $SLURM_NTASKS_PER_NODE
+SOAPdenovo-63mer all -s /home/carolpb/GenomeAnalysis/code/soapdenovo_assembly_config.txt -K 49 -o /home/carolpb/GenomeAnalysis/results/2_Assembly_dna/output49 -p $SLURM_NTASKS_PER_NODE
