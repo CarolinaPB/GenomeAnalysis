@@ -10,7 +10,7 @@
 module load bioinfo-tools
 module load FastQC/0.11.5
 # Your commands
-for filename in /home/carolpb/GenomeAnalysis/data/rna/trimmed*.fastq.gz
+for filename in /home/carolpb/GenomeAnalysis/data/rna/trimmed/*.fastq.gz
     do
         fastqc $filename -o /home/carolpb/GenomeAnalysis/data/rna/trimmed/fastqc_results;
     done
