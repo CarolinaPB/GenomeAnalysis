@@ -1,8 +1,8 @@
 #!/bin/bash -L
 #SBATCH -A g2019003
 #SBATCH -p core
-#SBATCH -n 2
-#SBATCH -t 03:00:00
+#SBATCH -n 6
+#SBATCH -t 220:00:00
 #SBATCH -J spades
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user Carolina.Barros.8371@student.uu.se
