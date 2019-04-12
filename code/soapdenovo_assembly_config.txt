@@ -1,5 +1,5 @@
 #maximal read length
-max_rd_len=120
+max_rd_len=100
 
 # paired-end
 [LIB]
