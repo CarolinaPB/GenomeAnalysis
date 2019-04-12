@@ -10,4 +10,4 @@
 module load bioinfo-tools
 module load soapdenovo
 
-/sw/bioinfo/SOAPdenovo/2.04-r240/rackham/bin/SOAPdenovo-127mer all -s /home/carolpb/GenomeAnalysis/code/soapdenovo_assembly_config.txt -K 49 -o /home/carolpb/GenomeAnalysis/results/3_Assembly_soapdenovo_dna/output49 -R
+/sw/bioinfo/SOAPdenovo/2.04-r240/rackham/bin/SOAPdenovo-127mer all -s /home/carolpb/GenomeAnalysis/code/soapdenovo_assembly_config.txt -K 49 -o /home/carolpb/GenomeAnalysis/results/3_Assembly_soapdenovo_dna/output49
