@@ -9,7 +9,7 @@
 # Load modules
 module load bioinfo-tools
 #module load GapCloser
-#module load soapdenovo-soapdenovo/2.04-r240
+module load soapdenovo/2.04-r240
 # Your commands
 
 GapCloser -b /home/carolpb/GenomeAnalysis/code/soapdenovo_assembly_config.txt -a /domus/h1/carolpb/GenomeAnalysis/results/2_Assembly_dna/output49.scafSeq -o /home/carolpb/GenomeAnalysis/results/2_GapCloser_dna/output_gapcloser.fasta
