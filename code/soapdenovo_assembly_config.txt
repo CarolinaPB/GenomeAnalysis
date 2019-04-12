@@ -5,7 +5,7 @@ max_rd_len=120
 [LIB]
 avg_ins=400
 reverse_seq=0
-asm_flags=3
+asm_flags=2
 rd_len_cutoff=100
 rank=1
 pair_num_cutoff=3
@@ -19,7 +19,7 @@ q=/home/carolpb/GenomeAnalysis/data/wgs/sel2_SRR5819794.trim_2U.fastq.gz
 [LIB]
 avg_ins=800
 reverse_seq=0
-asm_flags=3
+asm_flags=2
 rd_len_cutoff=100
 rank=1
 pair_num_cutoff=3
@@ -47,7 +47,7 @@ q=/home/carolpb/GenomeAnalysis/data/wgs/sel2_SRR5819796.trim_2U.fastq.gz
 [LIB]
 avg_ins=175
 reverse_seq=0
-asm_flags=3
+asm_flags=2
 rd_len_cutoff=100
 rank=1
 pair_num_cutoff=3
