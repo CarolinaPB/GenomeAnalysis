@@ -3,15 +3,13 @@
 #SBATCH -p core
 #SBATCH -n 2
 #SBATCH -t 04:00:00
-#SBATCH -J genome_assembly_spades
+#SBATCH -J trinity
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user Carolina.Barros.8371@student.uu.se
 
 # Load modules
 module load bioinfo-tools
 module load trinity
-
-
 
 /sw/bioinfo/trinity/2.4.0/rackham/Trinity --seqType fq --max_memory 13.6G \
 --left \
