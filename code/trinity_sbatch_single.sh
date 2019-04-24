@@ -11,7 +11,7 @@
 module load bioinfo-tools
 module load trinity
 
-/sw/bioinfo/trinity/2.4.0/rackham/Trinity --seqType fq --max_memory 13.6G \
+/sw/bioinfo/trinity/2.4.0/rackham/Trinity --seqType fq --max_memory 10G \
 --single \
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_1U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719014.trim_1U.fastq.gz,\
