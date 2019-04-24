@@ -47,4 +47,4 @@ module load trinity
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel3_SRR1719214.trim_2U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel3_SRR1719241.trim_2U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel3_SRR1719242.trim_2U.fastq.gz \
---output /home/carolpb/GenomeAnalysis/results/4_Transcriptome_Assembly_Trinity/Single
+--output /home/carolpb/GenomeAnalysis/results/4_Transcriptome_Assembly_Trinity/Trinity_Single
