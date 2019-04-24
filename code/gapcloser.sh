@@ -2,7 +2,7 @@
 #SBATCH -A g2019003
 #SBATCH -p core
 #SBATCH -n 2
-#SBATCH -t 00:30:00
+#SBATCH -t 01:30:00
 #SBATCH -J run_gapcloser
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user carolina.pitabarros@gmail.com
