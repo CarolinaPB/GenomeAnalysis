@@ -16,7 +16,7 @@ module load trinity/2.8.2
 
 
 
-/sw/bioinfo/trinity/2.8.2/rackham/Trinity --seqType fq --max_memory 2G \
+Trinity --seqType fq --max_memory 2G \
 --single \
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_1U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719014.trim_1U.fastq.gz,\
