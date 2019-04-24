@@ -9,7 +9,7 @@
 
 # Load modules
 module load bioinfo-tools
-module load trinity
+module load trinity/2.8.2
 
 /sw/bioinfo/trinity/2.8.2/rackham/Trinity --seqType fq --max_memory 10G \
 --single \
