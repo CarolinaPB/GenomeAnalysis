@@ -10,6 +10,8 @@
 # Load modules
 module load bioinfo-tools
 module load samtools/1.9
+module load jellyfish/2.2.6
+module load Salmon/0.9.1
 module load trinity/2.8.2
 
 
