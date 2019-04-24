@@ -3,7 +3,7 @@
 #SBATCH -p core
 #SBATCH -n 2
 #SBATCH -t 04:00:00
-#SBATCH -J trinity
+#SBATCH -J trinity single
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user Carolina.Barros.8371@student.uu.se
 
