@@ -1,0 +1,14 @@
+To run quast I used this website:
+http://quast.bioinf.spbau.ru
+
+Assemblies:
+- scaffolds.fasta (from spades)
+- output from gapcloser
+
+To choose my reference genome:
+Genome -> another genome -> reference (/home/carolpb/GenomeAnalysis/data/wgs_from_paper/sel2_NW_015504334_unziped.fasta)
+
+options:
+* scaffolds
+* find genes
+* Eukaryotic
