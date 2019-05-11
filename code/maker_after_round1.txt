@@ -59,6 +59,7 @@ We will now link the newly created SNAP hmm file in the MAKER control file. Chan
 
 To base the predictions in the second MAKER run only on SNAP remove the filepaths to the protein and est evidence or set the flags for est2genome=0 and protein2genome=0.
 
+## change directory to the main one where run_maker.sh and maker_otps.ctl are
 
 > maker
 

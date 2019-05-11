@@ -1,0 +1,38 @@
+Adapted from https://reslp.github.io/blog/My-MAKER-Pipeline/
+
+We will now train the second gene predictor AUGUSTUS.
+First follow maker_after_round1.txt till you have the export.ann and export.dna files
+
+convert SNAP ZFF files to GBK files.
+script available here: GitHub page: https://github.com/hyphaltip/genome-scripts/blob/master/gene_prediction/zff2augustus_gbk.pl
+
+The script needs to be run in the directory containing the export.ann and export.dna files.
+
+> zff2augustus_gbk.pl > augustus.gbk
+
+we will split the now created augustus.gbk file into a training and a test set:
+
+> perl randomSplit.pl augustus.gbk 100
+
+(randomSplit.pl comes with AUGUSTUS and is located in the scripts folder.)
+
+We now have to create a new species for our AUGUSTUS training
+
+> new_species.pl --species=mnatalensis
+
+(his script is also located in the AUGUSTUS/scripts directory)
+
+Lets now train AUGUSTUS with the training set file, evaluate the training and save the output of this test to a file for later reference:
+
+> etraining --species=mnatalensis augustus.gbk.train
+
+> augustus --species=mnatalensis augustus.gbk.test | tee first_training.out
+
+Once this is done, we are ready to improve prediction parameters of the models using the optimize_augustus.pl script again located in the AUGUSTUS/scripts directory:
+
+> optimize_augustus.pl --species=my_species augustus.gbk.train
+
+After this is done (this will take some time!) we can retrain and test AUGUSTUS with the optimized paramters and compare the results to the first run:
+
+> etraining --species=mnatalensis augustus.gbk.train
+> augustus --species=my_species augustus.gbk.test | tee second_training.out
