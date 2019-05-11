@@ -61,3 +61,11 @@ To base the predictions in the second MAKER run only on SNAP remove the filepath
 
 
 > maker
+
+
+
+
+
+#####
+After MAKER is finished repeat the above to create another set of hmms for SNAP.
+This can be done several times, however beware because SNAP can also be overtrained.
