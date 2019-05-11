@@ -1,0 +1,14 @@
+To run Maker2
+
+--> a separate set of control files will need to be generated for each genome annotated with MAKER
+
+cp -v /sw/apps/bioinfo/GeneMark/4.33-es/rackham/gm_key /home/carolpb/GenomeAnalysis/results/6_Maker2
+
+maker -h
+
+maker -CTL
+> creates the control files
+
+maker_exe.ctl - with all the paths to different executables used by MAKER on your system.
+maker_bopt.ctl - containing settings for BLAST and Exonerate.
+maker_opt.ctl - contains all other information for MAKER, including the location of the input genome file.
