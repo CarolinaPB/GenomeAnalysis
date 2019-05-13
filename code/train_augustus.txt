@@ -8,10 +8,13 @@ script available here: GitHub page: https://github.com/hyphaltip/genome-scripts/
 
 The script needs to be run in the directory containing the export.ann and export.dna files.
 
+> module load bioinfo-tools
+> module load maker
 > module load augustus
 
 > chmod +x ./zff2augustus_gbk.pl
-> zff2augustus_gbk.pl > augustus.gbk
+> cpan Bio::DB::Fasta
+> ./zff2augustus_gbk.pl > augustus.gbk
 
 we will split the now created augustus.gbk file into a training and a test set:
 
