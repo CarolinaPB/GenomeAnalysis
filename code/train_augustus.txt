@@ -62,3 +62,14 @@ add to the maker_opst.ctl:
 
 add to the run_maker.sh (before the maker command)
 > export AUGUSTUS_CONFIG_PATH="/home/carolpb/GenomeAnalysis/results/6_Maker2_paper/run_1/sel2_NW_015504334_unziped.maker.output/config"
+
+
+
+After it's done check if there are any errors:
+
+> less sel2_NW_015504334_unziped_master_datastore_index.log
+
+It should show:
+
+NW_015504334.1  sel2_NW_015504334_unziped_datastore/88/48/NW_015504334.1/       STARTED
+NW_015504334.1  sel2_NW_015504334_unziped_datastore/88/48/NW_015504334.1/       FINISHED
