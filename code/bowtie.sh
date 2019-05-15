@@ -7,6 +7,8 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user Carolina.Barros.8371@student.uu.se
 # Load modules
+
+### Very fast, can be ran on the command line (took 7seconds)
 module load bioinfo-tools
 module load tophat
 
