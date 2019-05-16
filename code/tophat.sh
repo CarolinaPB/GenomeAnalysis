@@ -10,8 +10,9 @@
 module load bioinfo-tools
 module load tophat
 
-tophat /home/carolpb/GenomeAnalysis/results/7_bowtie\
-[/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_1P.fastq.gz,\
+tophat -o /home/carolpb/GenomeAnalysis/results/8_tophat \
+/home/carolpb/GenomeAnalysis/results/7_bowtie/ref \
+/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_1P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719014.trim_1P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719015.trim_1P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719016.trim_1P.fastq.gz,\
@@ -27,8 +28,8 @@ tophat /home/carolpb/GenomeAnalysis/results/7_bowtie\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719213.trim_1P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719214.trim_1P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719241.trim_1P.fastq.gz,\
-/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719242.trim_1P.fastq.gz] \
-[/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_2P.fastq.gz,\
+/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719242.trim_1P.fastq.gz \
+/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_2P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719014.trim_2P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719015.trim_2P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719016.trim_2P.fastq.gz,\
@@ -44,8 +45,8 @@ tophat /home/carolpb/GenomeAnalysis/results/7_bowtie\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719213.trim_2P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719214.trim_2P.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719241.trim_2P.fastq.gz,\
-/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719242.trim_2P.fastq.gz] \
-[/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_1U.fastq.gz,\
+/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719242.trim_2P.fastq.gz,\
+/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_1U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719014.trim_1U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719015.trim_1U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719016.trim_1U.fastq.gz,\
@@ -78,5 +79,4 @@ tophat /home/carolpb/GenomeAnalysis/results/7_bowtie\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719213.trim_2U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719214.trim_2U.fastq.gz,\
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719241.trim_2U.fastq.gz,\
-/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719242.trim_2U.fastq.gz]
--o/ /home/carolpb/GenomeAnalysis/results/8_tophat
+/home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719242.trim_2U.fastq.gz
