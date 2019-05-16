@@ -10,6 +10,10 @@
 module load bioinfo-tools
 module load tophat
 
+### took about 7 seconds
+bowtie2-build -c [/home/carolpb/GenomeAnalysis/data/wgs_from_paper/sel2_NW_015504334_unziped.fa] /home/carolpb/GenomeAnalysis/results/7_bowtie/ref
+###
+
 tophat -o /home/carolpb/GenomeAnalysis/results/8_tophat \
 /home/carolpb/GenomeAnalysis/results/7_bowtie/ref \
 /home/carolpb/GenomeAnalysis/data/rna/pre_trimmed/sel2_SRR1719013.trim_1P.fastq.gz,\
