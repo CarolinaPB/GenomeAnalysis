@@ -12,4 +12,4 @@
 module load bioinfo-tools
 module load tophat
 
-bowtie2-build -c [/home/carolpb/GenomeAnalysis/data/wgs_from_paper/sel2_NW_015504334_unziped.fasta] /home/carolpb/GenomeAnalysis/results/7_bowtie/ref
+bowtie2-build -c [/home/carolpb/GenomeAnalysis/data/wgs_from_paper/sel2_NW_015504334_unziped.fa] /home/carolpb/GenomeAnalysis/results/7_bowtie/ref
