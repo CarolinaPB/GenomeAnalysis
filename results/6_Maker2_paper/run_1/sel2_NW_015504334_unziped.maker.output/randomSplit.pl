@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-
+# from: https://github.com/nextgenusfs/augustus/blob/master/scripts/randomSplit.pl
 #############################################################
 # randomSplit
 # randomly split a genbank file

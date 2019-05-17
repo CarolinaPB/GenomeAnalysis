@@ -31,14 +31,14 @@ prok_rm=0 #forces MAKER to repeatmask prokaryotes (no reason to change this), 1 
 softmask=1 #use soft-masking rather than hard-masking in BLAST (i.e. seg and dust filtering)
 
 #-----Gene Prediction
-snaphmm= #SNAP HMM file
+snaphmm=/home/carolpb/GenomeAnalysis/results/6_Maker2_paper/run_1/sel2_NW_015504334_unziped.maker.output/sel2_NW_015504334_unziped.hmm #SNAP HMM file
 gmhmm= #GeneMark HMM file
-augustus_species= #Augustus gene prediction species model
+augustus_species=human #Augustus gene prediction species model
 fgenesh_par_file= #FGENESH parameter file
 pred_gff= #ab-initio predictions from an external GFF3 file
 model_gff= #annotated gene models from an external GFF3 file (annotation pass-through)
 run_evm=0 #run EvidenceModeler, 1 = yes, 0 = no
-est2genome=1 #infer gene predictions directly from ESTs, 1 = yes, 0 = no
+est2genome=0 #infer gene predictions directly from ESTs, 1 = yes, 0 = no
 protein2genome=0 #infer predictions from protein homology, 1 = yes, 0 = no
 trna=0 #find tRNAs with tRNAscan, 1 = yes, 0 = no
 snoscan_rrna= #rRNA file to have Snoscan find snoRNAs
@@ -64,7 +64,7 @@ min_protein=0 #require at least this many amino acids in predicted proteins
 alt_splice=0 #Take extra steps to try and find alternative splicing, 1 = yes, 0 = no
 always_complete=0 #extra steps to force start and stop codons, 1 = yes, 0 = no
 map_forward=0 #map names and attributes forward from old GFF3 genes, 1 = yes, 0 = no
-keep_preds=0 #Concordance threshold to add unsupported gene prediction (bound by 0 and 1)
+keep_preds=1 #Concordance threshold to add unsupported gene prediction (bound by 0 and 1)
 
 split_hit=10000 #length for the splitting of hits (expected max intron size for evidence alignments)
 min_intron=20 #minimum intron length (used for alignment polishing)

@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/sw/comp/perl/5.18.4/rackham/bin/perl
 # from https://raw.githubusercontent.com/hyphaltip/genome-scripts/master/gene_prediction/zff2augustus_gbk.pl
 
 # This script assumes very specific ZFF right now, that you are passing in 

@@ -2,7 +2,7 @@
 #SBATCH -A g2019003
 #SBATCH -p core
 #SBATCH -n 4
-#SBATCH -t 02:30:00
+#SBATCH -t 10:00:00
 #SBATCH -J tophat
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user Carolina.Barros.8371@student.uu.se
@@ -10,8 +10,8 @@
 module load bioinfo-tools
 module load tophat
 
-### took about 7 seconds
-bowtie2-build -c [/home/carolpb/GenomeAnalysis/data/wgs_from_paper/sel2_NW_015504334_unziped.fa] /home/carolpb/GenomeAnalysis/results/7_bowtie/ref
+### really fast
+bowtie2-build -f /home/carolpb/GenomeAnalysis/data/wgs_from_paper/sel2_NW_015504334_unziped.fa /home/carolpb/GenomeAnalysis/results/7_bowtie/ref
 ###
 
 tophat -o /home/carolpb/GenomeAnalysis/results/8_tophat \
