@@ -10,5 +10,4 @@
 module load bioinfo-tools
 module load trimmomatic
 # Your commands
-
-java -jar /sw/apps/bioinfo/trimmomatic/0.36/rackham/trimmomatic-0.36.jar PE -phred33 /home/carolpb/GenomeAnalysis/data/rna/raw/sel2_SRR1719266.2.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/raw/sel2_SRR1719266.1.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.2_trimmed_P.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.2_trimmed_U.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.1_trimmed_P.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.1_trimmed_U.fastq.gz
+java -jar /sw/apps/bioinfo/trimmomatic/0.36/rackham/trimmomatic-0.36.jar PE -phred33 /home/carolpb/GenomeAnalysis/data/rna/raw/sel2_SRR1719266.2.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/raw/sel2_SRR1719266.1.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.2_trimmed_P.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.2_trimmed_U.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.1_trimmed_P.fastq.gz /home/carolpb/GenomeAnalysis/data/rna/trimmed/sel2_SRR1719266.1_trimmed_U.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
