@@ -43,3 +43,4 @@ genome_df_sorted$gene_name <- total$V1
 genome_df_sorted <- genome_df_sorted[c("start", "end", "bases", "gene_name")]
 
 write.table(genome_df_sorted,sep=",", file = "genes.csv", col.names=FALSE)
+

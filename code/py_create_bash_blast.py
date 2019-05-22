@@ -1,7 +1,3 @@
-# cat one_line_genome.txt | awk '{print substr($0,1049800,9362)}'" > temp.txt
-#
-# blastn -db nt -query temp.txt -out results.out
-
 genes_info=[]
 start=[]
 bases=[]
@@ -13,14 +9,6 @@ with open ("genes.csv", "r") as file:
         start.append(genes_info[i][1])
         bases.append(genes_info[i][3])
         genename.append(genes_info[i][4])
-        #print(genes_info[i][1])
-
-
-#print(genename[0])
-#for i in range(len(start)):
-#    print("cat genome_oneline.txt | awk '{print substr($0,"+"{},{}".format(start[i], bases[i])+")}' > temp.txt")
-#    print("blastn -db nt -query temp.txt -out gene"+str(i+1)+".out")
-
 
 with open("blast.sh", "w") as bash:
     bash.write("#!/bin/bash -l\n")
