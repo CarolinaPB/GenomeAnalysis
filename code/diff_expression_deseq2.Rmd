@@ -118,7 +118,7 @@ The z-score scale represents mean-subtracted regularized log-transformed read co
 ### Load data
 ```{r}
 cts = deseq2.matr
-coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_limbs.csv")
+coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_limbs.csv", sep=",", header = TRUE)
 ```
 
 ### create dataframe
@@ -171,11 +171,15 @@ par(mfrow = c(1,1))
 
 ```{r}
 plotMA(res)
+plotMA(sub_res)
+plotMA(res_dev)
 ```
 Scatter plot of log2 fold changes (on the y-axis) versus the mean of normalized counts (on the x-axis)
 
 Points will be colored red if the adjusted p value is less than 0.1
-plotMA(res_dev)
+
+In DESeq2, the function plotMA shows the log2 fold changes attributable to a given variable over the mean of normalized counts for all the samples in the DESeqDataSet. Points will be colored red if the adjusted p value is less than 0.1. Points which fall out of the window are plotted as open triangles pointing either up or down.
+
 
 ```{r}
 plotMA(reslfc)
@@ -193,15 +197,18 @@ which remove the noise associated with log2 fold changes from low count genes wi
 
 
 ```{r}
-p <- plotCounts(dds, gene=which.min(res$padj), intgroup="condition", returnData = TRUE)
+gene=which.min(res$padj)
+p <- plotCounts(dds, gene, intgroup="condition", returnData = TRUE)
 
 ggplot(p, aes(x=condition, y=count)) + 
   geom_point(position=position_jitter(w=0.1,h=0)) + 
-  scale_y_log10(breaks=c(100, 1000, 5000, 10000, 15000))
+  scale_y_log10(breaks=c(100, 1000, 5000, 10000, 15000)) +
+  ggtitle(rownames(res)[gene])+
+  theme(plot.title = element_text(hjust = 0.5))
 
 ```
 Examine the counts of reads for a single gene across the groups
-The gene which had the smallest p value from the results table created above
+The gene which had the smallest p value from the results table created above # TBX5
 
 ### Plot PCA
 ```{r}
@@ -265,6 +272,12 @@ write.csv(as.data.frame(resOrdered_dev), file="/Users/Carolina/Documents/GitHub/
 summary(res_dev)
 ```
 
+```{r}
+sub_res_dev <- subset(resOrdered_dev, padj <0.01)
+
+write.csv(as.data.frame(sub_res_dev), file="/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/dev_deseq2_results_pval0.01.csv")
+```
+
 ### Plot
 ```{r}
 par(mfrow = c(1,1))
@@ -272,6 +285,7 @@ par(mfrow = c(1,1))
 
 ```{r}
 plotMA(res_dev)
+plotMA(sub_res_dev)
 ```
 Scatter plot of log2 fold changes (on the y-axis) versus the mean of normalized counts (on the x-axis)
 
@@ -285,13 +299,21 @@ Examine the counts of reads for a single gene across the groups
 The gene which had the smallest p value from the results table created above
 
 ```{r}
-p<- plotCounts(dds_dev, gene=which.min(res_dev$padj), intgroup="condition", returnData = TRUE)
+gene2=which.min(res_dev$padj)
+p<- plotCounts(dds_dev, gene2, intgroup="condition", returnData = TRUE)
 
 ggplot(p, aes(x=condition, y=count)) + 
   geom_point(position=position_jitter(w=0.1,h=0)) + 
-  scale_y_log10(breaks=c(100, 1000, 5000))
+  scale_y_log10(breaks=c(100, 1000, 5000))+
+  ggtitle(rownames(res_dev)[gene2])+
+  theme(plot.title = element_text(hjust = 0.5))
 
-plotCounts(dds_dev, gene=which.min(res_dev$padj), intgroup="condition")
+ggplot(p, aes(x=condition, y=count)) + 
+  geom_point(position=position_jitter(w=0.1,h=0)) + 
+  scale_y_log10(breaks=c(100, 1000, 5000))+
+  ggtitle(rownames(res)[gene2])+
+  theme(plot.title = element_text(hjust = 0.5))
+
 ```
 
 ### Plot PCA
@@ -323,11 +345,30 @@ clustering_distance_rows = "correlation"
 ```
 
 ```{r}
-zScoreMatrix_dev <- (cts-rowMeans(cts))/(rowSds(as.matrix(cts)))[row(cts)]
-zScoreMatrix_dev <- na.omit(zScoreMatrix_dev)
-pheatmap(zScoreMatrix_dev, cluster_rows=TRUE, show_rownames=TRUE,
-         cluster_cols=FALSE)
+zScoreMatrix <- (cts-rowMeans(cts))/(rowSds(as.matrix(cts)))[row(cts)]
+
+#remove NaN (what were zeros before)
+zScoreMatrix <- na.omit(zScoreMatrix)
+pheatmap(zScoreMatrix, cluster_rows=TRUE, show_rownames=TRUE,
+         cluster_cols=FALSE, fontsize_row = 5)
 # can add  annotation_col=df
+```
+
+```{r}
+genes_pval <- rownames(sub_res_dev)
+
+htseq_genes_pval0.01 <- cts[is.element(rownames(cts), genes_pval),]
+htseq_genes_pval0.01
+
+```
+
+```{r}
+zScoreMatrix_pval <- (htseq_genes_pval0.01-rowMeans(htseq_genes_pval0.01))/(rowSds(as.matrix(htseq_genes_pval0.01)))[row(htseq_genes_pval0.01)]
+
+#remove NaN (what were zeros before)
+zScoreMatrix_pval <- na.omit(zScoreMatrix_pval)
+pheatmap(zScoreMatrix_pval, cluster_rows=TRUE, show_rownames=TRUE,
+         cluster_cols=FALSE)
 ```
 
 

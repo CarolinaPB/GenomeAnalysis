@@ -1,7 +1,7 @@
-	condition	type
-FL_15	Forelimb	Paired_end
-HL_15	Hindlimb	Paired_end
-FL_16	Forelimb	Paired_end
-HL_16	Hindlimb	Paired_end
-FL_17	Forelimb	Paired_end
-HL_17	Hindlimb	Paired_end
+,condition,type
+FL_15,Forelimb,Paired_end
+HL_15,Hindlimb,Paired_end
+FL_16,Forelimb,Paired_end
+HL_16,Hindlimb,Paired_end
+FL_17,Forelimb,Paired_end
+HL_17,Hindlimb,Paired_end
