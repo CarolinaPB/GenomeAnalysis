@@ -189,6 +189,11 @@ export AUGUSTUS_CONFIG_PATH="/home/carolpb/GenomeAnalysis/results/6_Maker2_paper
 
 Or add to the run_maker.sh (before the maker command) if you're running a sbatch script
 
+Run maker for the last time:
+```
+maker
+```
+
 After it's done check if there are any errors:
 
 ```
