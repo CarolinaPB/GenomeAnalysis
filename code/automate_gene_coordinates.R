@@ -16,7 +16,7 @@ genome_df <-subset(genome_df, V3=="gene")
 # only keep the base start and end point of the gene and the gene name
 genome_df <- genome_df[c("V4","V5","V9")]
 
-# remove "ID=" fr
+# remove "ID=" from the gene name column
 no_id <- gsub("ID=", "\\1", genome_df$V9)
 #no_name <- gsub(";*", "\\1", no_id)
 
@@ -42,5 +42,6 @@ genome_df_sorted$gene_name <- total$V1
 # remove column gene
 genome_df_sorted <- genome_df_sorted[c("start", "end", "bases", "gene_name")]
 
-write.table(genome_df_sorted,sep=",", file = "genes.csv", col.names=FALSE)
+#write.table(genome_df_sorted,sep=",", file = "genes.csv", col.names=FALSE)
+write.table(genome_df_sorted,sep=",", file = "genes2.csv", col.names=FALSE, row.names = FALSE)
 

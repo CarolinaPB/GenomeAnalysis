@@ -6,9 +6,9 @@ with open ("genes.csv", "r") as file:
     for line in file:
         genes_info.append(line.strip().split(","))
     for i in range(len(genes_info)):
-        start.append(genes_info[i][1])
-        bases.append(genes_info[i][3])
-        genename.append(genes_info[i][4])
+        start.append(genes_info[i][0])
+        bases.append(genes_info[i][2])
+        genename.append(genes_info[i][3])
 
 with open("blast.sh", "w") as bash:
     bash.write("#!/bin/bash -l\n")
