@@ -73,55 +73,55 @@ countData=countData[c("FL_15","HL_15","FL_16","HL_16","FL_17","HL_17")]
 ### Load data
 ```{r}
 cts = countData
-coldata_dev = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_dev.csv")
+coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_dev.csv")
 ```
 
 ### create dataframe
 ```{r}
-dds_dev <- DESeqDataSetFromMatrix(countData = cts,
-                              colData = coldata_dev,
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
                               design = ~ condition + type)
 ```
 
 ### Analyse data
 ```{r}
-dds_dev <- DESeq(dds_dev)
+dds <- DESeq(dds)
 ```
 
 ```{r}
 # results extracts a result table from a DESeq analysis giving base means across samples, log2 fold changes, standard errors, test statistics, p-values and adjusted p-values
-res_dev <- results(dds_dev)
+red <- results(dds)
 
 #resultsNames returns the names of the estimated effects (coefficents) of the model
-resultsNames(dds_dev)
+resultsNames(dds)
 ```
 
 ```{r}
 # Adds shrunken log2 fold changes (LFC) and SE to a results table from DESeq run without LFC shrinkage
-reslfc_dev_16_15 = lfcShrink(dds_dev, coef = "condition_CS16_vs_CS15", type = "apeglm")
-reslfc_dev_17_15 = lfcShrink(dds_dev, coef = "condition_CS17_vs_CS15", type = "apeglm")
-reslfc_dev_HL_FL = lfcShrink(dds_dev, coef = "type_HL_vs_FL", type = "apeglm")
+reslfc16_15 = lfcShrink(dds, coef = "condition_CS16_vs_CS15", type = "apeglm")
+reslfc17_15 = lfcShrink(dds, coef = "condition_CS17_vs_CS15", type = "apeglm")
+reslfcHL_FL = lfcShrink(dds, coef = "type_HL_vs_FL", type = "apeglm")
 
 ```
 
 ```{r}
-resOrdered_dev <- res_dev[order(res_dev$pvalue),]
+resOrdered <- red[order(red$pvalue),]
 ```
 Results ordered by P-value
 
 ### Write to file
 ```{r}
-write.csv(as.data.frame(resOrdered_dev), file="/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/dev_deseq2_results.csv")
+write.csv(as.data.frame(resOrdered), file="/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/dev_deseq2_results.csv")
 ```
 
 ```{r}
-summary(res_dev)
+summary(red)
 ```
 
 ```{r}
-sub_res_dev <- subset(resOrdered_dev, padj <0.01)
+sub_red <- subset(resOrdered, padj <0.01)
 
-write.csv(as.data.frame(sub_res_dev), file="/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/dev_deseq2_results_pval0.01.csv")
+write.csv(as.data.frame(sub_red), file="/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/dev_deseq2_results_pval0.01.csv")
 ```
 
 ### Plot
@@ -130,28 +130,28 @@ par(mfrow = c(1,1))
 ```
 
 ```{r}
-plotMA(res_dev)
-plotMA(sub_res_dev) #p-val < 0.01
+plotMA(red)
+plotMA(sub_red) #p-val < 0.01
 ```
 Scatter plot of log2 fold changes (on the y-axis) versus the mean of normalized counts (on the x-axis)
 
 ```{r}
-plotMA(reslfc_dev_16_15)
-plotMA(reslfc_dev_17_15)
-plotMA(reslfc_dev_HL_FL)
+plotMA(reslfc16_15)
+plotMA(reslfc17_15)
+plotMA(reslfcHL_FL)
 ```
 
 Examine the counts of reads for a single gene across the groups
 The gene which had the smallest p value from the results table created above
 
 ```{r}
-gene2=which.min(res_dev$padj)
-p<- plotCounts(dds_dev, gene2, intgroup="condition", returnData = TRUE)
+gene2=which.min(red$padj)
+p<- plotCounts(dds, gene2, intgroup="condition", returnData = TRUE)
 
 ggplot(p, aes(x=condition, y=count)) + 
   geom_point(position=position_jitter(w=0.1,h=0)) + 
   scale_y_log10(breaks=c(100, 1000, 5000))+
-  ggtitle(rownames(res_dev)[gene2])+
+  ggtitle(rownames(red)[gene2])+
   theme(plot.title = element_text(hjust = 0.5))
 
 #ggplot(p, aes(x=condition, y=count)) + 
@@ -164,7 +164,7 @@ ggplot(p, aes(x=condition, y=count)) +
 
 ### Plot PCA
 ```{r}
-vsd_dev = varianceStabilizingTransformation(dds_dev)
+vsd_dev = varianceStabilizingTransformation(dds)
 ```
 This function calculates a variance stabilizing transformation (VST) from the fitted dispersion-mean relation(s) and then transforms the count data (normalized by division by the size factors or normalization factors), yielding a matrix of values which are now approximately homoskedastic (having constant variance along the range of mean values)
 
@@ -182,9 +182,9 @@ ggplot(pcaData, aes(PC1, PC2, color=condition, shape=type)) +
 ```
 
 ```{r}
-select <- order(rowMeans(counts(dds_dev,normalized=TRUE)),
+select <- order(rowMeans(counts(dds,normalized=TRUE)),
                 decreasing=TRUE)[1:30]
-df <- as.data.frame(colData(dds_dev)[,c("condition","type")])
+df <- as.data.frame(colData(dds)[,c("condition","type")])
 pheatmap(assay(vsd_dev)[select,], cluster_rows=TRUE, show_rownames=TRUE,
          cluster_cols=FALSE, annotation_col=df)
 clustering_distance_rows = "correlation"
@@ -201,7 +201,7 @@ pheatmap(zScoreMatrix, cluster_rows=TRUE, show_rownames=TRUE,
 ```
 
 ```{r}
-genes_pval <- rownames(sub_res_dev)
+genes_pval <- rownames(sub_red)
 
 htseq_genes_pval0.01 <- cts[is.element(rownames(cts), genes_pval),]
 htseq_genes_pval0.01
