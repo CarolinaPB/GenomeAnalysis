@@ -10,6 +10,8 @@
 module load bioinfo-tools
 module load tophat
 
+# Run bowtie first
+bowtie2-build -f /home/carolpb/GenomeAnalysis/data/wgs_from_paper/sel2_NW_015504334_unziped.fa /home/carolpb/GenomeAnalysis/results/7_bowtie/ref
 
 ## PAIR ENDED
 
