@@ -73,7 +73,8 @@ countData=countData[c("FL_15","HL_15","FL_16","HL_16","FL_17","HL_17")]
 ### Load data
 ```{r}
 cts = countData
-coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_dev.csv")
+#coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_dev.csv")
+coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_FL_HL.csv", sep=";", header=TRUE)
 ```
 
 ### create deseq dataset
@@ -81,6 +82,7 @@ coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10
 dds <- DESeqDataSetFromMatrix(countData = cts,
                               colData = coldata,
                               design = ~ condition + type)
+                              
 ```
 
 ### Analyse data
@@ -96,11 +98,16 @@ res <- results(dds)
 resultsNames(dds)
 ```
 
+
 ```{r}
 # Adds shrunken log2 fold changes (LFC) and SE to a results table from DESeq run without LFC shrinkage
-reslfc16_15 = lfcShrink(dds, coef = "condition_CS16_vs_CS15", type = "apeglm")
-reslfc17_15 = lfcShrink(dds, coef = "condition_CS17_vs_CS15", type = "apeglm")
-reslfcHL_FL = lfcShrink(dds, coef = "type_HL_vs_FL", type = "apeglm")
+#reslfc16_15 = lfcShrink(dds, coef = "condition_CS16_vs_CS15", type = "apeglm")
+#reslfc17_15 = lfcShrink(dds, coef = "condition_CS17_vs_CS15", type = "apeglm")
+#reslfcHL_FL = lfcShrink(dds, coef = "type_HL_vs_FL", type = "apeglm")
+
+reslfc16_15 = lfcShrink(dds, coef = "condition_HL_vs_FL", type = "apeglm")
+#reslfc17_15 = lfcShrink(dds, coef = "type_CS16_vs_CS15", type = "apeglm")
+#reslfcHL_FL = lfcShrink(dds, coef = "type_CS16_vs_CS15", type = "apeglm")
 
 ```
 
@@ -170,7 +177,8 @@ This function calculates a variance stabilizing transformation (VST) from the fi
 pcaData <- plotPCA(vsd, intgroup=c("condition", "type"), returnData=TRUE)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 
-ggplot(pcaData, aes(PC1, PC2, color=condition, shape=type)) +
+#ggplot(pcaData, aes(PC1, PC2, color=condition, shape=type)) +
+ggplot(pcaData, aes(PC1, PC2, color=type, shape=condition)) +
   geom_point(size=3) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
@@ -179,12 +187,12 @@ ggplot(pcaData, aes(PC1, PC2, color=condition, shape=type)) +
 ```
 
 ```{r}
-select <- order(rowMeans(counts(dds,normalized=TRUE)),
-                decreasing=TRUE)[1:30]
-df <- as.data.frame(colData(dds)[,c("condition","type")])
-pheatmap(assay(vsd)[select,], cluster_rows=TRUE, show_rownames=TRUE,
-         cluster_cols=FALSE, annotation_col=df)
-clustering_distance_rows = "correlation"
+#select <- order(rowMeans(counts(dds,normalized=TRUE)),
+#                decreasing=TRUE)[1:30]
+#df <- as.data.frame(colData(dds)[,c("condition","type")])
+#pheatmap(assay(vsd)[select,], cluster_rows=TRUE, show_rownames=TRUE,
+#         cluster_cols=FALSE, annotation_col=df)
+#clustering_distance_rows = "correlation"
 ```
 
 ```{r}
