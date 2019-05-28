@@ -73,8 +73,8 @@ countData=countData[c("FL_15","HL_15","FL_16","HL_16","FL_17","HL_17")]
 ### Load data
 ```{r}
 cts = countData
-#coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_dev.csv")
-coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_FL_HL.csv", sep=";", header=TRUE)
+coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_dev.csv")
+#coldata = read.table("/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/metadata_FL_HL.csv", sep=";", header=TRUE)
 ```
 
 ### create deseq dataset
@@ -103,12 +103,11 @@ resultsNames(dds)
 # Adds shrunken log2 fold changes (LFC) and SE to a results table from DESeq run without LFC shrinkage
 #reslfc16_15 = lfcShrink(dds, coef = "condition_CS16_vs_CS15", type = "apeglm")
 #reslfc17_15 = lfcShrink(dds, coef = "condition_CS17_vs_CS15", type = "apeglm")
-#reslfcHL_FL = lfcShrink(dds, coef = "type_HL_vs_FL", type = "apeglm")
+reslfcHL_FL = lfcShrink(dds, coef = "type_HL_vs_FL", type = "apeglm")
 
-reslfc16_15 = lfcShrink(dds, coef = "condition_HL_vs_FL", type = "apeglm")
-#reslfc17_15 = lfcShrink(dds, coef = "type_CS16_vs_CS15", type = "apeglm")
-#reslfcHL_FL = lfcShrink(dds, coef = "type_CS16_vs_CS15", type = "apeglm")
+#reslfcHL_FL = lfcShrink(dds, coef = "condition_HL_vs_FL", type = "apeglm")
 
+write.csv(as.data.frame(reslfcHL_FL), file="/Users/Carolina/Documents/GitHub/GenomeAnalysis/results/10_deseq2/reslfcHL_FL.csv")
 ```
 
 ```{r}
@@ -135,13 +134,13 @@ write.csv(as.data.frame(sub_res), file="/Users/Carolina/Documents/GitHub/GenomeA
 
 ```{r}
 plotMA(res)
-plotMA(sub_res) #p-val < 0.01
+#plotMA(sub_res) #p-val < 0.01
 ```
 Scatter plot of log2 fold changes (on the y-axis) versus the mean of normalized counts (on the x-axis)
 
 ```{r}
-plotMA(reslfc16_15)
-plotMA(reslfc17_15)
+#plotMA(reslfc16_15)
+#plotMA(reslfc17_15)
 plotMA(reslfcHL_FL)
 ```
 
@@ -149,20 +148,36 @@ Examine the counts of reads for a single gene across the groups
 The gene which had the smallest p value from the results table created above
 
 ```{r}
-gene2=which.min(res$padj)
-p<- plotCounts(dds, gene2, intgroup="condition", returnData = TRUE)
+#gene2=which.min(res$padj)
+#gene2 = which(rownames(res) == "TBX5")
+gene2 = which(rownames(res) == "TBX5")
+p<- plotCounts(dds, gene2, intgroup=c("condition","type"), returnData = TRUE)
 
-ggplot(p, aes(x=condition, y=count)) + 
+ggplot(p, aes(x=condition, y=count, color=type)) + 
   geom_point(position=position_jitter(w=0.1,h=0)) + 
-  scale_y_log10(breaks=c(100, 1000, 5000))+
+  scale_y_log10(breaks=c(10,100, 1000,5000))+
   ggtitle(rownames(res)[gene2])+
   theme(plot.title = element_text(hjust = 0.5))
 
-#ggplot(p, aes(x=condition, y=count)) + 
- # geom_point(position=position_jitter(w=0.1,h=0)) + 
-  #scale_y_log10(breaks=c(100, 1000, 5000))+
-  #ggtitle(rownames(res)[gene2])+
-  #theme(plot.title = element_text(hjust = 0.5))
+
+gene2 = which(rownames(res) == "TBX5.1")
+p<- plotCounts(dds, gene2, intgroup=c("condition","type"), returnData = TRUE)
+
+ggplot(p, aes(x=condition, y=count, color=type)) + 
+  geom_point(position=position_jitter(w=0.1,h=0)) + 
+  scale_y_log10(breaks=c(10,100, 1000,5000))+
+  ggtitle(rownames(res)[gene2])+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+gene2 = which(rownames(res) == "TBX5.3")
+p<- plotCounts(dds, gene2, intgroup=c("condition","type"), returnData = TRUE)
+
+ggplot(p, aes(x=condition, y=count, color=type)) + 
+  geom_point(position=position_jitter(w=0.1,h=0)) + 
+  scale_y_log10(breaks=c(10,100, 1000,5000))+
+  ggtitle(rownames(res)[gene2])+
+  theme(plot.title = element_text(hjust = 0.5))
 
 ```
 
@@ -177,8 +192,7 @@ This function calculates a variance stabilizing transformation (VST) from the fi
 pcaData <- plotPCA(vsd, intgroup=c("condition", "type"), returnData=TRUE)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 
-#ggplot(pcaData, aes(PC1, PC2, color=condition, shape=type)) +
-ggplot(pcaData, aes(PC1, PC2, color=type, shape=condition)) +
+ggplot(pcaData, aes(PC1, PC2, color=condition, shape=type)) +
   geom_point(size=3) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
@@ -224,17 +238,15 @@ pheatmap(zScoreMatrix_pval, cluster_rows=TRUE, show_rownames=TRUE,
 
 
 ```{r}
-sampleDists <- dist(t(assay(vsd)))
+#sampleDists <- dist(t(assay(vsd)))
 
-sampleDistMatrix <- as.matrix(sampleDists)
-rownames(sampleDistMatrix) <- paste(vsd$condition, vsd$type, sep="-")
-colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
-pheatmap(sampleDistMatrix,
-         clustering_distance_rows=sampleDists,
-         clustering_distance_cols=sampleDists,
-         col=colors)
+#sampleDistMatrix <- as.matrix(sampleDists)
+#rownames(sampleDistMatrix) <- paste(vsd$condition, vsd$type, sep="-")
+#colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+#pheatmap(sampleDistMatrix,
+#         clustering_distance_rows=sampleDists,
+#         clustering_distance_cols=sampleDists,
+#         col=colors)
 ```
 A heatmap of this distance matrix gives us an overview over similarities and dissimilarities between samples
-
-
 
